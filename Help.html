@@ -1,0 +1,120 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="Styles\Styles2.css">
+</head>
+
+<a href="Home.php"><div class="topnav"> 
+    <div >
+  <img  class="logo-image" src="img/logo.jfif">
+</div></a>
+  <a  href="Home.php"><i class="fa fa-fw fa-home"></i>Home</a>
+  <a  href="Help.html"><i class="fa fa-fw fa-envelope"></i>Contact</a>
+  <a  href="Book.html"><i class="fa fa-plane" aria-hidden="true"></i> Book</a>
+  <a href="FlightSearchAid.php"><i class="fa fa-calendar" aria-hidden="true"></i> My Trip</a>
+  <div class="topnav-right">
+      <a href="registerHTML.html"><i class="fa fa-fw fa-user"></i>Sign up | Login</a>
+  </div>
+</div>
+
+</div>
+    <div class="container-contact">
+        <div class="about-section">
+            <h1>Contact Us</h1>
+            <p>Swing by for a trip around the world, or leave us a message: </p>
+        </div>
+        <div class="row">
+          <div class="column-contact">
+            <img src="img/Contact.webp" style="width:100%">
+          </div>
+          <div class="column-contact">
+            <form method="POST">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="firstname" required="required" placeholder="Your name..">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="lastname" required="required" placeholder="Your last name..">
+              <label for="country">City</label>
+                <input type="text" name="FromC"  required="required" id="City" list="FromC" placeholder="Country..." onkeyup="Country()">
+                <datalist id="FromC">
+                </datalist>
+                <label for="email">Email</label>
+              <input type="email" id="email" name="email" required="required" placeholder="Your email..">
+              <label for="subject">Subject (Optional)</label>
+              <textarea id="subject" name="subject" optional="optional" placeholder="Write something..(500 char)" maxlength="500" style="height:170px"></textarea>
+              <input class="button" id="submit" type="submit" value="Submit" onclick="ShowAlert()">
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+          <img class="footer-content" alt="smile" src="img/skytrax-airline-covid19-logo.svg" WIDTH=90 HEIGHT=100> 
+          <img class="footer-content" alt="smile" src="img/AirlineOftheYear2021.svg" WIDTH=100 HEIGHT=90> 
+          <img class="footer-content" alt="smile" src="img/Theqa_logo_SVG.svg" width="125" height="50">
+          <div class="footer-content">
+              <h1 style="color:white">Welcome to our website</h1>
+              <br>
+              <br>
+              <p style="color:white">Let's stay connected</p> 
+              
+              <ul class="socials">
+                  <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="https://twitter.com/i/flow/login"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                  <li><a href="https://www.youtube.com/"><i class="fa fa-youtube"></i></a></li>
+              </ul>
+    
+            </div>
+                                         
+          <iframe style="text-align:right;margin: right 1000px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3451.450024542732!2d31.3966993145951!3d30.109933622431942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14581771026121f9%3A0xa38d42c793391a6a!2sAirport!5e0!3m2!1sen!2seg!4v1652309091653!5m2!1sen!2seg" width="250" height="100"></iframe>
+    
+          <div class="footer-bottom">
+              <p style="color:white">EGWay. All rights reserved</p>
+                      <div class="footer-menu">
+                        <ul class="f-menu">
+                          <li><a href="Home.php">Home</a></li>
+                          <li><a href="AboutUs.html">About Us</a></li>
+                          
+                        </ul>
+                      </div>
+          </div>
+          </div>   
+      </footer>
+<script>
+      function Country() {
+            jQuery.ajax(
+                {
+                    url:"FlightSearchAid.php",
+                    data:"City="+document.getElementById('City').value,
+                    type:"GET",
+                    success:function(data)
+                    {
+                        document.getElementById("FromC").innerHTML = data;                     
+                    }
+                }
+            );
+        }
+
+$("form").on("submit", function (e) {
+    var dataString = $(this).serialize();
+     
+    $.ajax({
+      type: "POST",
+      url: "ContactUs.php",
+      data: dataString,
+      success: function () {
+        alert("Data Added Successfully");
+      }
+    });
+ 
+    e.preventDefault();
+});
+  </script>
+    
+</html>
